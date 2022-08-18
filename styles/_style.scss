@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  background-color: rgb(73, 73, 73);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+  padding: 2rem 1rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  & > h1 {
+    text-align: center;
+    color: violet;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+}
+
+#to-do-form {
+  display: flex;
+}
+
+input,
+button {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+#to-do {
+  flex: 1 1 0%;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-right: 1.25rem;
+  font-size: 1.25rem;
+  background-color: rgb(51, 39, 39);
+  color: gray;
+}
+
+#to-do-submit {
+  //   color: rgb(243, 77, 105);
+  font-size: 1.5rem;
+  font-weight: 900;
+  background-image: linear-gradient(to right, pink, purple);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#to-do-submit:hover {
+  opacity: 0.9;
+}
+#to-do-submit:active {
+  opacity: 0.7;
+}
+
+main {
+  flex: 1 1 0%;
+  padding: 2rem 1rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  & > h2 {
+    color: violet;
+  }
+}
+#tasks {
+  padding: 1rem;
+  border-radius: 1rem;
+  & > .task {
+    display: flex;
+
+    justify-content: space-between;
+    background-color: rgb(80, 77, 73);
+    padding: 1rem;
+    border-radius: 1rem;
+    & > .content {
+      flex: 1 1 0%;
+    }
+
+    & > .content > .text {
+      color: rgb(31, 212, 100);
+      font-size: 1.15rem;
+      width: 100%;
+      display: block;
+      transition: 0.4s;
+      &:not(:read-only) {
+        color: rgb(219, 97, 117);
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  & > button {
+    font-size: 1.25rem;
+  }
+  & > button:hover {
+    opacity: 0.6;
+  }
+  & > button:active {
+    opacity: 0.3;
+  }
+  & > .edit {
+    background-image: linear-gradient(to right, pink, purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  & > .delete {
+    color: crimson;
+  }
+}
