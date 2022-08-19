@@ -118,3 +118,22 @@ main {
     color: crimson;
   }
 }
+.footer {
+  height: 65px;
+  text-align: center;
+}
+
+.footer img {
+  height: 50px;
+  margin-left: 20px;
+}
+
+.footer img:hover {
+  height: 70px;
+}
+.copyright {
+  color: #5facac;
+  font-size: 2rem;
+  padding: 10px 0;
+  text-align: center;
+}
