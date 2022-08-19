@@ -5,6 +5,26 @@ const input = document.getElementById('to-do');
 const list = document.getElementById('tasks');
 const localStorageData = JSON.parse(localStorage.getItem('toDo_DB'));
 
+window.addEventListener('load', function () {
+  if (!localStorageData) return;
+  arrOfObjInLocalStorage = localStorageData;
+  list.innerHTML += render(arrOfObjInLocalStorage);
+});
+
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+  let task = input.value;
+  if (!task) {
+    alert('please write something');
+    return;
+  }
+
+  arrOfObjInLocalStorage.push(task);
+  localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
+  list.innerHTML = render(arrOfObjInLocalStorage);
+  input.value = '';
+});
+
 function remove(event) {
   let currValue = event.path[2].children[0].children[0].value;
   for (let i = 0; i < arrOfObjInLocalStorage.length; i++) {
@@ -34,26 +54,6 @@ function edit() {
     }
   }
 }
-
-form.addEventListener('submit', function (event) {
-  event.preventDefault();
-  let task = input.value;
-  if (!task) {
-    alert('please write something');
-    return;
-  }
-
-  arrOfObjInLocalStorage.push(task);
-  localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
-  list.innerHTML = render(arrOfObjInLocalStorage);
-  input.value = '';
-});
-
-window.addEventListener('load', function () {
-  if (!localStorageData) return;
-  arrOfObjInLocalStorage = localStorageData;
-  list.innerHTML += render(arrOfObjInLocalStorage);
-});
 
 function render(arr) {
   let html = '';
