@@ -1,70 +1,72 @@
 'use-strict';
-
+let arrOfObjInLocalStorage = [];
 const form = document.getElementById('to-do-form');
 const input = document.getElementById('to-do');
 const list = document.getElementById('tasks');
-// list.innerHTML = JSON.parse(localStorage.getItem('div'));
-console.log(list.innerHTML);
+const localStorageData = JSON.parse(localStorage.getItem('toDo_DB'));
+
+function remove(event) {
+  let currValue = event.path[2].children[0].children[0].value;
+  for (let i = 0; i < arrOfObjInLocalStorage.length; i++) {
+    if (arrOfObjInLocalStorage[i] === currValue) {
+      arrOfObjInLocalStorage.splice(i, 1);
+      localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
+      list.innerHTML = render(arrOfObjInLocalStorage);
+    }
+  }
+}
+
+function edit() {
+  const editBtns = document.querySelectorAll('.edit');
+  const inputs = document.querySelectorAll('.text');
+
+  for (let i = 0; i < inputs.length; i++) {
+    if (editBtns[i].innerText.toLowerCase() === 'edit') {
+      inputs[i].removeAttribute('readonly');
+      inputs[i].focus();
+      editBtns[i].innerText = 'Save';
+    } else {
+      inputs[i].setAttribute('readonly', 'readonly');
+      editBtns[i].innerText = 'Edit';
+      arrOfObjInLocalStorage[i] = inputs[i].value;
+      localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
+      list.innerHTML = render(arrOfObjInLocalStorage);
+    }
+  }
+}
+
 form.addEventListener('submit', function (event) {
   event.preventDefault();
-
-  if (!input.value) {
+  let task = input.value;
+  if (!task) {
     alert('please write something');
     return;
   }
-  let info = {
-    text: list.innerHTML,
-  };
-  localStorage.setItem(input.value, JSON.stringify(info.text));
-  const taskElement = document.createElement('div');
-  taskElement.classList.add('task');
-  const contentElement = document.createElement('div');
-  contentElement.classList.add('content');
 
-  taskElement.appendChild(contentElement);
-
-  const taskInputElement = document.createElement('input');
-  taskInputElement.classList.add('text');
-  taskInputElement.type = 'text';
-  taskInputElement.value = input.value;
-  taskInputElement.setAttribute('readonly', 'readonly');
-  contentElement.appendChild(taskInputElement);
-  const actionElement = document.createElement('div');
-  actionElement.classList.add('actions');
-  const editBtn = document.createElement('button');
-  editBtn.classList.add('edit');
-  editBtn.innerText = 'Edit';
-  const deleteBtn = document.createElement('button');
-  deleteBtn.classList.add('delete');
-  deleteBtn.innerText = 'Delete';
-
-  actionElement.appendChild(editBtn);
-  actionElement.appendChild(deleteBtn);
-  taskElement.appendChild(actionElement);
-  list.appendChild(taskElement);
-
+  arrOfObjInLocalStorage.push(task);
+  localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
+  list.innerHTML = render(arrOfObjInLocalStorage);
   input.value = '';
-  console.log(list.innerHTML);
-  editBtn.addEventListener('click', function () {
-    if (editBtn.innerText.toLowerCase() === 'edit') {
-      taskInputElement.removeAttribute('readonly');
-      taskElement.focus();
-      editBtn.innerText = 'Save';
-    } else {
-      taskInputElement.setAttribute('readonly', 'readonly');
-      editBtn.innerText = 'Edit';
-    }
-  });
-
-  deleteBtn.addEventListener('click', function () {
-    list.removeChild(taskElement);
-  });
 });
-// function saveToDos() {
-//   let items = document.querySelectorAll('.task');
-//   console.log(items);
-//   for (let i = 0; i < items.length; ++i) {
-//     list.push(items[i].innerHTML);
-//     localStorage.setItem('savedValues', JSON.stringify(items[i]));
-//   }
-// }
+
+window.addEventListener('load', function () {
+  if (!localStorageData) return;
+  arrOfObjInLocalStorage = localStorageData;
+  list.innerHTML += render(arrOfObjInLocalStorage);
+});
+
+function render(arr) {
+  let html = '';
+  for (let i = 0; i < arr.length; i++) {
+    html += ` <div class="task">
+    <div class="content">
+      <input class="text" type="text" readonly="readonly" value="${arr[i]}" />
+    </div>
+    <div class="actions">
+      <button onclick="edit()" class="edit" value="${arr[i]}">Edit</button
+      ><button class="delete" onclick="remove(event)" value="${arr[i]}">Delete</button>
+    </div>
+  </div>`;
+  }
+  return html;
+}
