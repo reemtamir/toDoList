@@ -1,4 +1,7 @@
 'use-strict';
+
+//FIX- CAN'T REMOVE FROM MOBILE
+//FIX- EDIT SPECIFIC INPUT AND NOT ALL OF THEM
 let arrOfObjInLocalStorage = [];
 const form = document.getElementById('to-do-form');
 const input = document.getElementById('to-do');
