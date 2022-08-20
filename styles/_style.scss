@@ -92,7 +92,7 @@ main {
       display: block;
       transition: 0.4s;
       &:not(:read-only) {
-        color: rgb(219, 97, 117);
+        color: rgb(245, 241, 0);
       }
     }
   }
