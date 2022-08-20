@@ -50,26 +50,23 @@ function remove(event) {
   }
 }
 
-function edit() {
+function edit(index) {
   const editBtns = document.querySelectorAll('.edit');
-  const inputs = document.querySelectorAll('.text');
-
-  for (let i = 0; i < inputs.length; i++) {
-    if (editBtns[i].innerText.toLowerCase() === 'edit') {
-      audioEdit.play();
-      audioEdit.currentTime = 0;
-      inputs[i].removeAttribute('readonly');
-      inputs[i].focus();
-      editBtns[i].innerText = 'Save';
-    } else {
-      inputs[i].setAttribute('readonly', 'readonly');
-      editBtns[i].innerText = 'Edit';
-      arrOfObjInLocalStorage[i] = inputs[i].value;
-      localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
-      audioSave.play();
-      audioSave.currentTime = 0;
-      list.innerHTML = render(arrOfObjInLocalStorage);
-    }
+  const chosenInput = document.getElementById(`input${index}`);
+  if (editBtns[index].innerText.toLowerCase() === 'edit') {
+    audioEdit.play();
+    audioEdit.currentTime = 0;
+    chosenInput.removeAttribute('readonly');
+    chosenInput.focus();
+    editBtns[index].innerText = 'Save';
+  } else {
+    chosenInput.setAttribute('readonly', 'readonly');
+    editBtns[index].innerText = 'Edit';
+    arrOfObjInLocalStorage[index] = chosenInput.value;
+    localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
+    audioSave.play();
+    audioSave.currentTime = 0;
+    list.innerHTML = render(arrOfObjInLocalStorage);
   }
 }
 
@@ -78,11 +75,15 @@ function render(arr) {
   for (let i = 0; i < arr.length; i++) {
     html += ` <div class="task">
     <div class="content">
-      <input class="text" type="text" readonly="readonly" value="${arr[i]}" />
+      <input id="input${i}" class="text" type="text" readonly="readonly" value="${arr[i]}" />
     </div>
     <div class="actions">
-      <button onclick="edit()" class="edit" value="${arr[i]}">Edit</button
-      ><button class="delete" onclick="remove(event)" value="${arr[i]}">Delete</button>
+      <button onclick="edit(${i})" class="edit" value="${arr[i]}">
+      Edit
+      </button>
+      <button class="delete" onclick="remove(event)" value="${arr[i]}">
+      Delete
+      </button>
     </div>
   </div>`;
   }
