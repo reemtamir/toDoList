@@ -7,6 +7,11 @@ const form = document.getElementById('to-do-form');
 const input = document.getElementById('to-do');
 const list = document.getElementById('tasks');
 const localStorageData = JSON.parse(localStorage.getItem('toDo_DB'));
+const audioDelete = new Audio('sounds/delete.mp3');
+const audioSave = new Audio('sounds/save.mp3');
+const audioEdit = new Audio('sounds/edit.mp3');
+const audioAdd = new Audio('sounds/add.mp3');
+const audioWrong = new Audio('sounds/wrong.mp3');
 
 window.addEventListener('load', function () {
   if (!localStorageData) return;
@@ -18,12 +23,16 @@ form.addEventListener('submit', function (event) {
   event.preventDefault();
   let task = input.value;
   if (!task) {
+    audioWrong.play();
+    audioWrong.currentTime = 0;
     alert('please write something');
     return;
   }
 
   arrOfObjInLocalStorage.push(task);
   localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
+  audioAdd.play();
+  audioAdd.currentTime = 0;
   list.innerHTML = render(arrOfObjInLocalStorage);
   input.value = '';
 });
@@ -34,6 +43,8 @@ function remove(event) {
     if (arrOfObjInLocalStorage[i] === currValue) {
       arrOfObjInLocalStorage.splice(i, 1);
       localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
+      audioDelete.play();
+      audioDelete.currentTime = 0;
       list.innerHTML = render(arrOfObjInLocalStorage);
     }
   }
@@ -45,6 +56,8 @@ function edit() {
 
   for (let i = 0; i < inputs.length; i++) {
     if (editBtns[i].innerText.toLowerCase() === 'edit') {
+      audioEdit.play();
+      audioEdit.currentTime = 0;
       inputs[i].removeAttribute('readonly');
       inputs[i].focus();
       editBtns[i].innerText = 'Save';
@@ -53,6 +66,8 @@ function edit() {
       editBtns[i].innerText = 'Edit';
       arrOfObjInLocalStorage[i] = inputs[i].value;
       localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
+      audioSave.play();
+      audioSave.currentTime = 0;
       list.innerHTML = render(arrOfObjInLocalStorage);
     }
   }
