@@ -11,7 +11,7 @@ const localStorageData = JSON.parse(localStorage.getItem('toDo_DB'));
 window.addEventListener('load', function () {
   if (!localStorageData) return;
   arrOfObjInLocalStorage = localStorageData;
-  list.innerHTML += render(arrOfObjInLocalStorage);
+  list.innerHTML = render(arrOfObjInLocalStorage);
 });
 
 form.addEventListener('submit', function (event) {
