@@ -28,6 +28,10 @@ header > h1 {
   display: flex;
 }
 
+button {
+  cursor: pointer;
+}
+
 input,
 button {
   -webkit-appearance: none;
@@ -49,6 +53,7 @@ button {
 }
 
 #to-do-submit {
+  cursor: pointer;
   font-size: 1.5rem;
   font-weight: 900;
   background-image: linear-gradient(to right, pink, purple);
