@@ -51,17 +51,17 @@ function remove(event) {
 }
 
 function edit(index) {
-  const editBtns = document.querySelectorAll('.edit');
+  const editButtons = document.querySelectorAll('.edit');
   const chosenInput = document.getElementById(`input${index}`);
-  if (editBtns[index].innerText.toLowerCase() === 'edit') {
+  if (editButtons[index].innerText.toLowerCase() === 'edit') {
     audioEdit.play();
     audioEdit.currentTime = 0;
     chosenInput.removeAttribute('readonly');
     chosenInput.focus();
-    editBtns[index].innerText = 'Save';
+    editButtons[index].innerText = 'Save';
   } else {
     chosenInput.setAttribute('readonly', 'readonly');
-    editBtns[index].innerText = 'Edit';
+    editButtons[index].innerText = 'Edit';
     arrOfObjInLocalStorage[index] = chosenInput.value;
     localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
     audioSave.play();
