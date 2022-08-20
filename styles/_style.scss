@@ -93,6 +93,7 @@ main {
       transition: 0.4s;
       &:not(:read-only) {
         color: rgb(245, 241, 0);
+        font-size: 1.8rem;
       }
     }
   }

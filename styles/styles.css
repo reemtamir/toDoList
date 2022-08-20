@@ -99,9 +99,11 @@ main > h2 {
 }
 #tasks > .task > .content > .text:not(:-moz-read-only) {
   color: rgb(245, 241, 0);
+  font-size: 1.8rem;
 }
 #tasks > .task > .content > .text:not(:read-only) {
   color: rgb(245, 241, 0);
+  font-size: 1.8rem;
 }
 
 .actions {
