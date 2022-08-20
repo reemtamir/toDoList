@@ -98,10 +98,10 @@ main > h2 {
   transition: 0.4s;
 }
 #tasks > .task > .content > .text:not(:-moz-read-only) {
-  color: rgb(219, 97, 117);
+  color: rgb(245, 241, 0);
 }
 #tasks > .task > .content > .text:not(:read-only) {
-  color: rgb(219, 97, 117);
+  color: rgb(245, 241, 0);
 }
 
 .actions {
