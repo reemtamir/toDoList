@@ -8,7 +8,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  color: white;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -20,7 +19,7 @@ header {
 }
 header > h1 {
   text-align: center;
-  color: violet;
+  color: rgb(130, 137, 238);
   margin-bottom: 1rem;
   font-size: 2.5rem;
 }
