@@ -1,7 +1,5 @@
 'use-strict';
 
-//FIX- CAN'T REMOVE FROM MOBILE
-//FIX- EDIT SPECIFIC INPUT AND NOT ALL OF THEM
 let arrOfObjInLocalStorage = [];
 const form = document.getElementById('to-do-form');
 const input = document.getElementById('to-do');
@@ -66,7 +64,6 @@ function edit(index) {
     localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
     audioSave.play();
     audioSave.currentTime = 0;
-    list.innerHTML = render(arrOfObjInLocalStorage);
   }
 }
 
