@@ -74,7 +74,7 @@ function render(arr) {
   let html = '';
   for (let i = 0; i < arr.length; i++) {
     html += ` <div class="task">
-    <div class="content">
+    <div class="content" style="margin-bottom:5px">
       <input id="input${i}" class="text" type="text" readonly="readonly" value="${arr[i]}" />
     </div>
     <div class="actions">
