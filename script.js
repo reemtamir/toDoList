@@ -1,9 +1,7 @@
 'use-strict';
-
 let arrOfObjInLocalStorage = [];
-const form = document.getElementById('to-do-form');
-const input = document.getElementById('to-do');
-const list = document.getElementById('tasks');
+$('#to-do');
+$('#tasks');
 const localStorageData = JSON.parse(localStorage.getItem('toDo_DB'));
 const audioDelete = new Audio('sounds/delete.mp3');
 const audioSave = new Audio('sounds/save.mp3');
@@ -11,15 +9,16 @@ const audioEdit = new Audio('sounds/edit.mp3');
 const audioAdd = new Audio('sounds/add.mp3');
 const audioWrong = new Audio('sounds/wrong.mp3');
 
-window.addEventListener('load', function () {
+$(window).on('load', function () {
   if (!localStorageData) return;
   arrOfObjInLocalStorage = localStorageData;
-  list.innerHTML = render(arrOfObjInLocalStorage);
+  $('#tasks').html(render(arrOfObjInLocalStorage));
 });
 
-form.addEventListener('submit', function (event) {
+$('#to-do-form').on('submit', function (event) {
   event.preventDefault();
-  let task = input.value;
+  let task = $('#to-do')[0].value;
+
   if (!task) {
     audioWrong.play();
     audioWrong.currentTime = 0;
@@ -31,8 +30,9 @@ form.addEventListener('submit', function (event) {
   localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
   audioAdd.play();
   audioAdd.currentTime = 0;
-  list.innerHTML = render(arrOfObjInLocalStorage);
-  input.value = '';
+
+  $('#tasks').html(render(arrOfObjInLocalStorage));
+  $('#to-do')[0].value = '';
 });
 
 function remove(event) {
@@ -43,7 +43,7 @@ function remove(event) {
       localStorage.setItem('toDo_DB', JSON.stringify(arrOfObjInLocalStorage));
       audioDelete.play();
       audioDelete.currentTime = 0;
-      list.innerHTML = render(arrOfObjInLocalStorage);
+      $('#tasks').html(render(arrOfObjInLocalStorage));
     }
   }
 }
@@ -84,5 +84,6 @@ function render(arr) {
     </div>
   </div>`;
   }
+
   return html;
 }
